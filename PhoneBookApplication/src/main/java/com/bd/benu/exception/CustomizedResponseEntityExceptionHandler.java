@@ -13,14 +13,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
-	public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) {
+	public final ResponseEntity<ErrorDeatils> handleAllException(Exception ex, WebRequest request) {
 		ErrorDeatils errorDeatils = new ErrorDeatils(LocalDate.now(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<>(errorDeatils, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<ErrorDeatils>(errorDeatils, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(handleContcatNotFundException.class)
-	public final ResponseEntity<Object> handleContcatNotFundException(Exception ex, WebRequest request) {
+	public final ResponseEntity<ErrorDeatils> handleContcatNotFundException(Exception ex, WebRequest request) {
 		ErrorDeatils errorDeatils = new ErrorDeatils(LocalDate.now(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<>(errorDeatils, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ErrorDeatils>(errorDeatils, HttpStatus.NOT_FOUND);
 	}
 }
